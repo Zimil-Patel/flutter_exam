@@ -1,8 +1,14 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_exam/controller/contact_controller.dart';
 import 'package:flutter_exam/firebase_options.dart';
+import 'package:flutter_exam/screens/auth/sign_in.dart';
+import 'package:flutter_exam/services/auth_services.dart';
+import 'package:get/get.dart';
 
 import 'screens/home_page.dart';
+
+var contactController = Get.put(ContactController());
 
 // ASC DESC
 Future<void> main() async {
@@ -19,7 +25,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(useMaterial3: false),
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: AuthServices.authServices.getCurrentUser() != null ? HomePage() : SignInPage(),
     );
   }
 }
